@@ -727,33 +727,63 @@ var TemplateList = map[string]string{"403": `<div class="missing-content">
     </tr>
   </thead>
   <tbody class="{{.Field}}-table">
-    {{range $k, $v := (index .TableFields 0).ValueArr}}
-      <tr>
-          {{range $key, $item := $.TableFields }}
-              <td>
-                  <div class="form-group" style="margin-bottom: 0px;">
-                    <div class="col-sm-12">
-                        {{template "form_components" (changeValue $item $k)}}
-                    </div>
-                  </div>
-              </td>
-          {{end}}
-
-          <td class="form-group" style="width: 174px;">
-              <div>
-                    <div class="{{$.Field}}-up btn btn-warning btn-sm pull-right" style="margin-left: 5px;">
-                        <i class="fa fa-arrow-up"></i>
-                    </div>
-                    <div class="{{$.Field}}-down btn btn-warning btn-sm pull-right" style="margin-left: 5px;">
-                        <i class="fa fa-arrow-down"></i>
-                    </div> 
-                    <div class="{{$.Field}}-remove btn btn-warning btn-sm pull-right">
-                        <i class="fa fa-trash">&nbsp;</i>{{lang "remove"}}
-                    </div> 
-              </div>
-          </td>
-      </tr>
-    {{end}}
+	{{ if or (eq (index .TableFields 0).FormType 2) (eq (index .TableFields 0).FormType 3)}}
+		{{range $k, $v := (index .TableFields 0).OptionsArr}}
+		  <tr>
+			  {{range $key, $item := $.TableFields }}
+				  <td>
+					  <div class="form-group" style="margin-bottom: 0px;">
+						<div class="col-sm-12">
+							{{template "form_components" (changeValue $item $k)}}
+						</div>
+					  </div>
+				  </td>
+			  {{end}}
+	
+			  <td class="form-group" style="width: 174px;">
+				  <div>
+						<div class="{{$.Field}}-up btn btn-warning btn-sm pull-right" style="margin-left: 5px;">
+							<i class="fa fa-arrow-up"></i>
+						</div>
+						<div class="{{$.Field}}-down btn btn-warning btn-sm pull-right" style="margin-left: 5px;">
+							<i class="fa fa-arrow-down"></i>
+						</div> 
+						<div class="{{$.Field}}-remove btn btn-warning btn-sm pull-right">
+							<i class="fa fa-trash">&nbsp;</i>{{lang "remove"}}
+						</div> 
+				  </div>
+			  </td>
+		  </tr>
+		{{end}}
+    {{else}}
+		{{range $k, $v := (index .TableFields 0).ValueArr}}
+		  <tr>
+			  {{range $key, $item := $.TableFields }}
+				  <td>
+					  <div class="form-group" style="margin-bottom: 0px;">
+						<div class="col-sm-12">
+							{{template "form_components" (changeValue $item $k)}}
+						</div>
+					  </div>
+				  </td>
+			  {{end}}
+	
+			  <td class="form-group" style="width: 174px;">
+				  <div>
+						<div class="{{$.Field}}-up btn btn-warning btn-sm pull-right" style="margin-left: 5px;">
+							<i class="fa fa-arrow-up"></i>
+						</div>
+						<div class="{{$.Field}}-down btn btn-warning btn-sm pull-right" style="margin-left: 5px;">
+							<i class="fa fa-arrow-down"></i>
+						</div> 
+						<div class="{{$.Field}}-remove btn btn-warning btn-sm pull-right">
+							<i class="fa fa-trash">&nbsp;</i>{{lang "remove"}}
+						</div> 
+				  </div>
+			  </td>
+		  </tr>
+		{{end}}
+	{{end}}
   </tbody>
   <tfoot>
     <tr>
