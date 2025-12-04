@@ -2682,6 +2682,10 @@ function checkNavLength() {
 const fixedKey = "go_admin__sidebar_fixed";
 
 $(function () {
+
+	$.ajaxSetup({
+		cache: true
+	});
   let isFixed = window.localStorage.getItem(fixedKey);
   if (isFixed === "true") {
     $(".main-sidebar").css("position", "fixed");
@@ -2729,4 +2733,3 @@ function activateMenuItem() {
     });
   }
 }
-
